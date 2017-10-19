@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CC883221F974F160037EE5B /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC883211F974F160037EE5B /* webViewController.swift */; };
+		1CC883241F975A640037EE5B /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 1CC883231F975A640037EE5B /* index.html */; };
 		926804CC1F94870300CBE551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926804CB1F94870300CBE551 /* AppDelegate.swift */; };
 		926804CE1F94870300CBE551 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926804CD1F94870300CBE551 /* ViewController.swift */; };
 		926804D11F94870300CBE551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926804CF1F94870300CBE551 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1CC883211F974F160037EE5B /* webViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
+		1CC883231F975A640037EE5B /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		926804C81F94870300CBE551 /* webApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = webApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926804CB1F94870300CBE551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926804CD1F94870300CBE551 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		926804BF1F94870300CBE551 = {
 			isa = PBXGroup;
 			children = (
+				1CC883231F975A640037EE5B /* index.html */,
 				926804F91F94873200CBE551 /* tools */,
 				926804CA1F94870300CBE551 /* webApp2 */,
 				926804DF1F94870300CBE551 /* webApp2Tests */,
@@ -105,6 +110,7 @@
 				926804CB1F94870300CBE551 /* AppDelegate.swift */,
 				926804CD1F94870300CBE551 /* ViewController.swift */,
 				926804FC1F9494C100CBE551 /* WebStettingsViewController.swift */,
+				1CC883211F974F160037EE5B /* webViewController.swift */,
 				926804CF1F94870300CBE551 /* Main.storyboard */,
 				926804D21F94870300CBE551 /* Assets.xcassets */,
 				926804D41F94870300CBE551 /* LaunchScreen.storyboard */,
@@ -247,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				926804D61F94870300CBE551 /* LaunchScreen.storyboard in Resources */,
+				1CC883241F975A640037EE5B /* index.html in Resources */,
 				926804D31F94870300CBE551 /* Assets.xcassets in Resources */,
 				926804D11F94870300CBE551 /* Main.storyboard in Resources */,
 			);
@@ -273,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CC883221F974F160037EE5B /* webViewController.swift in Sources */,
 				926804CE1F94870300CBE551 /* ViewController.swift in Sources */,
 				926804CC1F94870300CBE551 /* AppDelegate.swift in Sources */,
 				926804FD1F9494C100CBE551 /* WebStettingsViewController.swift in Sources */,
@@ -523,6 +531,7 @@
 				926804F21F94870300CBE551 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926804F31F94870300CBE551 /* Build configuration list for PBXNativeTarget "webApp2Tests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +540,7 @@
 				926804F51F94870300CBE551 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926804F61F94870300CBE551 /* Build configuration list for PBXNativeTarget "webApp2UITests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +549,7 @@
 				926804F81F94870300CBE551 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

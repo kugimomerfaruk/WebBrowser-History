@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var urlTextFieldOutlet: UITextField!
+class ViewController: UIViewController, WKUIDelegate {
     
+    @IBOutlet weak var urlTextFieldOutlet: UITextField!
+    @IBOutlet weak var webViewOutlet: UIView!
     @IBOutlet weak var goBtnOutlet: UIButton!
+    
+    var webView: WKWebView!
+    
+
     @IBAction func goBtnAction(_ sender: UIButton) {
         let urlCheck = goOrSearchURL(
                 checkURL: urlTextFieldOutlet.text!,
@@ -37,21 +43,34 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
             print("Gidilecek URL : \(urlCheck.url)")
+            if urlCheck.url != " " {
+                searchHistory.insert(urlCheck.url, at: 0)
+                print(searchHistory)
+                urlTextFieldOutlet.text! = ""
+                let myURL = URL(string: urlCheck.url)
+                let myRequest = URLRequest(url: myURL!)
+                webView.load(myRequest)
+            }
+    
         }
-        searchHistory.insert(urlCheck.url, at: 0)
-        print(searchHistory)
+    
     }
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        webView = WKWebView(frame: webViewOutlet.bounds, configuration: WKWebViewConfiguration() )
+        self.webViewOutlet.addSubview(webView)
+        self.webView.allowsBackForwardNavigationGestures = true
+        //let localURL = Bundle.main.url(forResource: "index", withExtension: "html")
+        let myURL = URL(string: defaultSearcUrl)
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 }
 
