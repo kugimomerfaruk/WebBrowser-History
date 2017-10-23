@@ -60,13 +60,60 @@ class ViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // User Default  -> defaultSearcUrl
+        if let UserDefaultURL = UserDefaults.standard.object(forKey: "UserDefaultURL") as? String {
+            defaultSearcUrl = UserDefaultURL
+            print("Kullanıcının Belirlediği URL = \(defaultSearcUrl)")
+        }
+        
+        if let UsersearchIsOn = UserDefaults.standard.object(forKey: "searchIsOn") as? Bool {
+        searchIsOn = UsersearchIsOn
+            print("Kullanıcı Arama Yapılsın Ayarı = \(searchIsOn)")
+        }
+        
+        if let UserselectedSegment = UserDefaults.standard.object(forKey: "selectedSegment") as? Int {
+        selectedSegment = UserselectedSegment
+            print("Kullanıcı Ayarlar ve Geçmiş Sekme Ayarı = \(selectedSegment)")
+        }
+        
+        if let UserSearchUrl = UserDefaults.standard.object(forKey: "searchURL") as? Int {
+        searchURL = UserSearchUrl
+            print("Kullanıcı Arama Motoru Ayarı = \(UserSearchUrl)")
+        }
+        
+        if searchHistory.count > 0 {
+            print("Şuan Gidilecek Adres = \(searchHistory[SelectedHistoryURL])")
+        }
+        
+        
+        
+        //GotoHistoryURL = searchHistory[GotoHistoryURL]
+        ///print(GotoHistoryURL)
+        
         webView = WKWebView(frame: webViewOutlet.bounds, configuration: WKWebViewConfiguration() )
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.webViewOutlet.addSubview(webView)
         self.webView.allowsBackForwardNavigationGestures = true
         //let localURL = Bundle.main.url(forResource: "index", withExtension: "html")
+        
+        if  searchHistory.count > 0 {
+  
+            let myURL = URL(string: searchHistory[SelectedHistoryURL])
+            let myRequest = URLRequest(url: myURL!)
+            webView.load(myRequest)
+            
+        }else {
+        
+        
         let myURL = URL(string: defaultSearcUrl)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
+    
+    }
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

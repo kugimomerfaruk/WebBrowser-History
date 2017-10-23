@@ -8,28 +8,40 @@
 
 import UIKit
 
-var searchHistory = [String]()
-var defaultSearcUrl : String = "https://www.google.com/"
 let searchEngines = [
     ["Google", "https://www.google.com.tr/search?q=", "google"],
     ["Yandex", "https://yandex.com/search?q=", "yahoo"],
-    ["Bing", "https://bing/search?q=", "bing"],
+    ["Bing", "https://bing.com/search?q=", "bing"],
 ]
 
+var searchHistory = [String]()
+var defaultSearcUrl : String = "https://www.google.com/"
+var SelectedHistoryURL : Int = 0
+var GotoHistoryURL : String = ""
 var searchs : String = ""
 var searchIsOn = true
-var searchURL = 2
 var selectedSegment = 0
+//-----------
+
+var searchURL = 2
+
+//------------
 
 class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var historyViewOutlet: UIView!
     @IBOutlet weak var webSearchHistoryOutlet: UILabel!
     @IBOutlet weak var tableHistoryView: UITableView!
     @IBOutlet weak var defaultUrlTextField: UITextField!
+    @IBOutlet weak var settingsSegmentOutlet: UISegmentedControl!
+    @IBOutlet weak var settingsViewOutlet: UIView!
+    @IBOutlet weak var searchImageOutlet: UIImageView!
+    @IBOutlet weak var searchEnginePickerOutlet: UIPickerView!
     
     @IBAction func defaultUrlAddButton(_ sender: UIButton) {
         
         defaultSearcUrl = defaultUrlTextField.text!
+        
+        UserDefaults.standard.set(defaultSearcUrl, forKey: "UserDefaultURL")
         print(defaultUrlTextField.text!)
         
     }
@@ -37,19 +49,18 @@ class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func settingsSegmentAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: "selectedSegment")
         settingsViewOutlet.isHidden = false
             historyViewOutlet.isHidden = true
         } else if sender.selectedSegmentIndex == 1 {
+            UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: "selectedSegment")
             settingsViewOutlet.isHidden = true
             historyViewOutlet.isHidden = false
         }
-        selectedSegment = sender.selectedSegmentIndex
+       selectedSegment = sender.selectedSegmentIndex
     }
     
-    @IBOutlet weak var settingsSegmentOutlet: UISegmentedControl!
-    @IBOutlet weak var settingsViewOutlet: UIView!
-    @IBOutlet weak var searchImageOutlet: UIImageView!
-    @IBOutlet weak var searchEnginePickerOutlet: UIPickerView!
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -65,6 +76,7 @@ class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         searchURL = row
+        UserDefaults.standard.set(searchURL, forKey: "searchURL")
         print(print(searchURL))
         searchImageOutlet.image = UIImage(named: searchEngines[row][2])
     }
@@ -81,16 +93,18 @@ class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         if sender.isOn == true {
             searchSettingsView.isHidden = false
+            
             searchIsOn = true
+            UserDefaults.standard.set(searchIsOn, forKey: "searchIsOn")
         } else {
             searchSettingsView.isHidden = true
             searchIsOn = false
+            UserDefaults.standard.set(searchIsOn, forKey: "searchIsOn")
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
        
-      
     }
     
     // --------------------Table View Begin--------------------
@@ -116,12 +130,22 @@ class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+        
+        SelectedHistoryURL = indexPath.row
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+        self.present(settingsViewController, animated: true, completion: nil)
+        
+        
     }
+    
     
     // --------------------Table View End--------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         defaultUrlTextField.text = defaultSearcUrl
         self.tableHistoryView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -156,4 +180,4 @@ class WebStettingsViewController: UIViewController, UIPickerViewDelegate, UIPick
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    }
+}
